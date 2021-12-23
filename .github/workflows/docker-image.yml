@@ -44,7 +44,7 @@ jobs:
         echo $ | helm registry login cloudnativeacr01.azurecr.io --username cloudnativeacr01 --password mqQLbr9e0wwHnaEHM/AVaD2uMqvgdmXd
         
     - name: Package the helm chart
-      run: helm package ./helm/simple-api
+      run: helm package ./helm/actiondemo01-api
       
     - name: save helm chart to local registry
       run: |
