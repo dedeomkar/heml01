@@ -2,7 +2,7 @@ replicaCount: 2
 k8s:
   namespace: "default"
 app:
-  name: "actiondemo01-api"
+  name: "simple-api"
 service:
   port: "5000"
 metrics:
@@ -14,14 +14,14 @@ memory:
   target: "413Mi"
   #This is 85% of the memory limit set.
 pv:
-  name: "actiondemo01sc"
+  name: "simplesc"
 pvc:
-  name: "actiondemo01pvc"
+  name: "simplepvc"
 
 image:
-  repository: "cloudnativeacr01.azurecr.io/actiondemo01"
+  repository: "cloudnativeacr01.azurecr.io/simple"
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "v3"
 imagePullSecrets:
   name: acr-auth
 
