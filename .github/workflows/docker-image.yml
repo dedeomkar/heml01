@@ -41,7 +41,7 @@ jobs:
         
     - name: Login to ACR using HELM
       run: |
-        echo $ | helm registry login cloudnativeacr01.azurecr.io
+        echo $ | helm registry login cloudnativeacr01.azurecr.io --username cloudnativeacr01 --password mqQLbr9e0wwHnaEHM/AVaD2uMqvgdmXd
         
     - name: Package the helm chart
       run: helm package ./helm/simple-api
