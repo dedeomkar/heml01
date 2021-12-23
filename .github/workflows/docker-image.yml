@@ -91,7 +91,7 @@ jobs:
       
       
     - name: Helm Chart Install 
-      run: helm install --namespace ns-simple --install --set image.tag=latest actiondemo01-api ./install/actiondemo01-api # release name chart name
+      run: helm upgrade --namespace ns-simple --install --set image.tag=latest actiondemo01-api ./install/actiondemo01-api # release name chart name
      
       
       
