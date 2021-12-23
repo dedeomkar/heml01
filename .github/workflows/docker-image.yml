@@ -89,8 +89,6 @@ jobs:
     - name: Helm Chart Move
       run: helm chart export cloudnativeacr01.azurecr.io/charts-simple-api:v1 --destination ./install
       
-    - name: Helm Chart Install
-      run: helm create --namespace ns-simple
       
     - name: Helm Chart Install 
       run: helm install --namespace ns-simple --install --set image.tag=latest actiondemo01-api ./install/actiondemo01-api # release name chart name
