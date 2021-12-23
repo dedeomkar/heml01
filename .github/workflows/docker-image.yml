@@ -61,16 +61,7 @@ jobs:
     needs: build_push_image # Will wait for the execution of the previous job
     
     steps:
-    - uses: actions/checkout@v2
-#     - name: Azure Kubernetes set context
-#       uses: Azure/aks-set-context@v1.1
-#       with:
-#         # Azure credentials i.e. output of `az ad sp create-for-rbac --sdk-auth`
-#         creds: ${{ secrets.AKS_CREDS }}
-#         # Resource Group Name
-#         resource-group: Intel_RG_01
-#         # AKS Cluster Name
-#         cluster-name: sidlabaks03
+    - uses: actions/checkout@v2 
 
 
     - name: Kubernetes set context
@@ -87,19 +78,22 @@ jobs:
         
     - name: Login to ACR using HELM
       run: |
-        echo $ | helm registry login sidlabacr03.azurecr.io --username sidlabacr03 --password JFHb3IFYta5QZxR44XzU6j=ch6OhS9GI
+        echo $ | helm registry login cloudnativeacr01.azurecr.io --username cloudnativeacr01 --password mqQLbr9e0wwHnaEHM/AVaD2uMqvgdmXd
         
     - name : Set Helm Env Var
       run : export HELM_EXPERIMENTAL_OCI=1  
       
     - name: Helm Chart Pull
-      run: helm chart pull sidlabacr03.azurecr.io/charts-actiondemo01-api:latest
+      run: helm chart pull cloudnativeacr01.azurecr.io/charts-simple-api:v1
    
     - name: Helm Chart Move
-      run: helm chart export sidlabacr03.azurecr.io/charts-actiondemo01-api:latest --destination ./install
+      run: helm chart export cloudnativeacr01.azurecr.io/charts-simple-api:v1 --destination ./install
       
     - name: Helm Chart Install
-      run: helm upgrade --namespace ns-dev --install --set image.tag=latest actiondemo01-api ./install/actiondemo01-api # release name chart name
+      run: helm create --namespace ns-simple
+      
+    - name: Helm Chart Install 
+      run: helm install --namespace ns-simple --install --set image.tag=latest actiondemo01-api ./install/actiondemo01-api # release name chart name
      
       
       
